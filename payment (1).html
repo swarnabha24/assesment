@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway Form</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(52, 85, 171);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-container {
+            max-width: 1100px;
+            display: flex;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        #payment-form {
+            flex: 6;
+            height: 214.075px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+        }
+
+        p {
+            opacity: 0.6;
+        }
+
+        #card-element {
+            width: 400px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        #error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        #success-message {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: transparent;
+            border: transparent;
+        }
+
+        #pay-button {
+            display: inline-block;
+            background-color: rgb(52, 85, 171);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        #pay-button>#btn {
+            background-color: transparent;
+            border: transparent;
+            color: #fff;
+            font-size: larger;
+            margin-left: 10px;
+        }
+
+        #order-summary {
+            flex: 5;
+            height: 214.075px;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+
+    <script src="#">
+
+        function navigateToPaymentPage() {
+            const selectedPlan = localStorage.getItem('selectedPlan');
+            window.location.href = `payment.html?plan=${selectedPlan}`;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedPlan = urlParams.get('plan');
+
+            const typeElement = document.getElementById('type');
+            const billingElement = document.getElementById('billing');
+            const priceElement = document.getElementById('price');
+
+            if (selectedPlan === 'mobile') {
+                typeElement.textContent = 'Mobile Plan';
+                billingElement.textContent = 'Monthly Billing';
+                priceElement.textContent = '₹ 100';
+            } else if (selectedPlan === 'basic') {
+                typeElement.textContent = 'Basic Plan';
+                billingElement.textContent = 'Monthly Billing';
+                priceElement.textContent = '₹ 200';
+            } else if (selectedPlan === 'standard') {
+                typeElement.textContent = 'Standard Plan';
+                billingElement.textContent = 'Monthly Billing';
+                priceElement.textContent = '₹ 500';
+            } else if (selectedPlan === 'premium') {
+                typeElement.textContent = 'Premium Plan';
+                billingElement.textContent = 'Monthly Billing';
+                priceElement.textContent = '₹ 700';
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div class="payment-container">
+        <div id="payment-form">
+            <h1>Complete Payment</h1>
+            <p>Enter your credit or debit card details below</p>
+            <div id="card-element">
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            <div id="error-message"></div>
+            <div id="success-message"></div>
+
+            <button type="submit"> <a href="#" id="pay-button"> <input type="button" value="Confirm Payment" id="btn">
+                </a>
+            </button>
+        </div>
+
+        <div id="order-summary">
+            <h2>Order Summary</h2>
+            <p>
+                <span>
+                    Plan Name
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div id="type"></div>
+                </span>
+            </p>
+            <hr>
+            <p>
+                <span>
+                    Billing Cycle
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div id="billing"></div>
+                </span>
+            </p>
+            <hr>
+            <p>
+                <span>
+                    Price Plane
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div id="price"></div>
+                </span>
+            </p>
+            <hr>
+        </div>
+    </div>
+
+
+    <script>
+        // Replace with your own Stripe public key
+        const stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');
+
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+
+        cardElement.mount('#card-element');
+
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const payButton = document.getElementById('pay-button');
+
+        payButton.addEventListener('click', async () => {
+            try {
+                const { token, error } = await stripe.createToken(cardElement);
+                if (error) {
+                    errorMessage.textContent = error.message;
+                    successMessage.textContent = '';
+                } else {
+                    errorMessage.textContent = '';
+                    successMessage.textContent = 'Payment successful! Token: ' + token.id;
+                }
+            } catch (error) {
+                console.error(error);
+                errorMessage.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(32, 63, 158);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            background-color: white;
+            width: 42vh;
+            height: 47vh;
+            border: transparent;
+            border-radius: 15px;
+        }
+
+        form {
+            padding: 8%;
+
+        }
+
+        /* form {
+            display: block;
+            justify-content: center;
+            align-content: center;
+            padding: 25px;
+        } */
+
+        h4 {
+            padding-bottom: 22px;
+            padding-top: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .inputsec {
+            display: block;
+            width: 230px;
+            font-size: 10px;
+            font-weight: 550;
+            margin: 7px;
+        }
+
+        input {
+            height: 14px;
+            width: 220px;
+            padding: 5px;
+            margin: 7px 0;
+        }
+
+        #checkbox {
+            width: 14px;
+        }
+
+        #check {
+            width: 90px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: transparent;
+            border: transparent;
+        }
+
+        button>a {
+            text-decoration: none;
+        }
+
+        #btn {
+            width: 234px;
+            height: 36px;
+            padding: 7px;
+            margin: 7px 0;
+            color: #fff;
+            background-color: rgb(56, 85, 171);
+            border: transparent;
+            border-radius: 5px;
+        }
+
+
+        footer {
+            padding-bottom: 5px;
+            padding-top: 14px;
+            display: flex;
+            justify-content: center;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form action="">
+
+            <header>
+
+                <h4><span id="element"></span></h4>
+
+            </header>
+
+            <div class="inputsec">
+
+                <label for="email" class="label">Email
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                </label>
+
+                <label for="name" class="label">Password
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                </label>
+
+                <label for="checkbox" class="label" id="check">
+                    <input type="checkbox" name="checkbox" id="checkbox"> Remember Me
+                </label>
+
+                <button>
+                    <a href="subcribtion_plan.html" target="_blank" rel="noopener noreferrer"><input type="button" value="Login" id="btn" required></a>
+                </button>
+
+            </div>
+
+            <footer>
+
+                <p id="p">Already have an Account? <a href="index.html" target="_blank" rel="noopener noreferrer"
+                        id="login"> Sign Up</a>
+                </p>
+
+            </footer>
+
+        </form>
+
+    </div>
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- Setup and start animation! -->
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Login To Your Account'],
+            typeSpeed: 50,
+        });
+    </script>
+</body>
+
+</html>

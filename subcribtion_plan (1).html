@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Pricing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(52, 85, 171);
+            width: 120vh;
+            height: 98vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #f8f8f8;
+        }
+
+        .pricing-container {
+            background-color: #f8f8f8;
+            display: flex;
+            padding: 60px 50px;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .container-2 {
+            display: block;
+            justify-content: left;
+            width: 250px;
+        }
+
+        .container-3 {
+            margin: 10px 20px 0 0;
+            width: 200px;
+            padding: 20px 1px;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: rgb(52, 85, 171);
+            padding: 15px 10px;
+            border-radius: 30px;
+        }
+
+        .pricing-toggle button {
+            background-color: rgb(52, 85, 171);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            color: #fff;
+            padding: 0 10px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .pricing-toggle button.active {
+            padding: 10px 12px;
+            background-color: #fff;
+            color: rgb(52, 85, 171);
+        }
+
+        .pricing-plan {
+            border-radius: 5px;
+            padding: 20px 0;
+            text-align: center;
+            margin: 10px 0;
+            transition: transform 0.2s;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        .pricing-plan.active {
+            opacity: 1;
+            color: rgb(52, 85, 171);
+            font-weight: 600;
+        }
+
+        .pricing-plan h2 {
+            background-color: rgb(52, 85, 171);
+            margin: 10px;
+            width: 200px;
+            color: #fff;
+            padding: 50px 1px;
+        }
+
+
+        .watch {
+            /* display: inline-block; */
+            /* width: 10px; */
+            /* padding: -7px; */
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #btn {
+            background-color: rgb(52, 85, 171);
+            color: #fff;
+            padding: 15px 130px;
+            font-size: 20px;
+            margin: 0 465px 40px 465px;
+            border: transparent;
+            border-radius: 5px;
+        }
+
+        #btn>a {
+            color: #f8f8f8;
+            text-decoration: none;
+        }
+
+        hr {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="pricing-container">
+            <div class="container-2">
+                <div class="container-3">
+                    <div class="pricing-toggle">
+                        <button id="monthly-btn" class="active">Monthly</button>
+                        <button id="yearly-btn">Yearly</button>
+                    </div>
+                </div>
+
+                <p><span id="mnth-yr">Monthly Price</span></p>
+                <hr>
+                <p>Video Quality</p>
+                <hr>
+                <p>Resolution</p>
+                <hr>
+                <p>Device you can use to watch</p><br><br><br><br><br>
+                <br><br><br><br><br>
+            </div>
+
+            <div class="pricing-plan" id="mobile" onclick="highlightPlan('mobile')">
+                <h2>Mobile</h2>
+                <p><span id="mobile-price">₹ 100</span></p>
+                <hr>
+                <p>Good</p>
+                <hr>
+                <p>480</p>
+                <hr>
+                <p class="watch">
+                    <br>
+                    <span class="1">Phone</span><br><br><br>
+                    <span class="2">Tablet</span><br><br><br>
+                    <br><br><br><br>
+                </p>
+            </div>
+            <div class="pricing-plan" id="basic" onclick="highlightPlan('basic')">
+                <h2>Basic</h2>
+                <p><span id="basic-price">₹ 200</span></p>
+                <hr>
+                <p>Good</p>
+                <hr>
+                <p>480p</p>
+                <hr>
+                <p class="watch">
+                    <br>
+                    <span class="1">Phone</span><br><br><br>
+                    <span class="2">Tablet</span><br><br><br>
+                    <span class="3">Computer</span><br><br><br>
+                    <span class="4">Tv</span>
+                </p>
+            </div>
+            <div class="pricing-plan" id="standard" onclick="highlightPlan('standard')">
+                <h2>Standard</h2>
+                <p><span id="standard-price">₹ 500</span></p>
+                <hr>
+                <p>Better</p>
+                <hr>
+                <p>1080p</p>
+                <hr>
+                <p class="watch">
+                    <br>
+                    <span class="1">Phone</span><br><br><br>
+                    <span class="2">Tablet</span><br><br><br>
+                    <span class="3">Computer</span><br><br><br>
+                    <span class="4">Tv</span>
+                </p>
+
+            </div>
+            <div class="pricing-plan" id="premium" onclick="highlightPlan('premium')">
+                <h2>Premium</h2>
+                <p><span id="premium-price">₹ 700</span></p>
+                <hr>
+                <p>Best</p>
+                <hr>
+                <p>4K+HDR</p>
+                <hr>
+                <p class="watch">
+                    <br>
+                    <span class="1">Phone</span><br><br><br>
+                    <span class="2">Tablet</span><br><br><br>
+                    <span class="3">Computer</span><br><br><br>
+                    <span class="4">Tv</span>
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <button id="btn" onclick="navigateToPaymentPage()"><a href="payment.html" target="_blank">Next</a></button>
+        </footer>
+
+    </div>
+
+    <script>
+        const monthlyBtn = document.getElementById('monthly-btn');
+        const yearlyBtn = document.getElementById('yearly-btn');
+        const monthlyToyearly = document.getElementById('mnth-yr');
+        const mobilePrice = document.getElementById('mobile-price');
+        const basicPrice = document.getElementById('basic-price');
+        const standardPrice = document.getElementById('standard-price');
+        const premiumPrice = document.getElementById('premium-price');
+
+        function highlightPlan(planId) {
+            document.querySelectorAll('.pricing-plan').forEach(plan => {
+                plan.classList.remove('active');
+            });
+            document.getElementById(planId).classList.add('active');
+
+            // Store the selected plan in localStorage
+            localStorage.setItem('selectedPlan', planId);
+        }
+
+        monthlyBtn.addEventListener('click', () => {
+            monthlyBtn.classList.add('active');
+            yearlyBtn.classList.remove('active');
+            monthlyToyearly.textContent = 'Monthly Price';
+            mobilePrice.textContent = '₹ 100';
+            basicPrice.textContent = '₹ 200';
+            standardPrice.textContent = '₹ 500';
+            premiumPrice.textContent = '₹ 700';
+            yearlyBtn.disabled = false;
+            monthlyBtn.disabled = true;
+        });
+
+        yearlyBtn.addEventListener('click', () => {
+            yearlyBtn.classList.add('active');
+            monthlyBtn.classList.remove('active');
+            monthlyToyearly.textContent = 'Yearly Price';
+            mobilePrice.textContent = '₹ 1000';
+            basicPrice.textContent = '₹ 2000';
+            standardPrice.textContent = '₹ 5000';
+            premiumPrice.textContent = '₹ 7000';
+            monthlyBtn.disabled = false;
+            yearlyBtn.disabled = true;
+        });
+
+        function navigateToPaymentPage() {
+            // Retrieve the selected plan from localStorage
+            const selectedPlan = localStorage.getItem('selectedPlan');
+
+            // Redirect to the payment page and pass the selected plan as a query parameter
+            window.location.href = `payment.html?plan=${selectedPlan}`;
+        }
+
+    </script>
+
+
+</body>
+
+</html>
